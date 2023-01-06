@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+.main-body{
+    background-color: #F0E9DB;
+}
+.card-header{
+    background-color: #fbfaf8;
+    border-radius: 20px;
+}
+.generic-card{
+    background-color: #fbfaf8;
+    padding: 2%;
+    border-radius: 20px;
+}
