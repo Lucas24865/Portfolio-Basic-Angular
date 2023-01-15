@@ -1,22 +1,32 @@
 <div>
     <div class="row m-2 mt-3 align-items-center">
-        <div class="col-2 p-3">
-            <div class="generic-card">
+        <div class=" generic-card col-3 p-3">
+            <div>
+                <div class="d-flex align-items-center flex-column">
+                    <button type="button" class="btn btn-sm btn-outline-dark btn-edit" [hidden]="!permission.admin" (click)="openModalName()" ><fa-icon
+                        [icon]="faPen"></fa-icon>
+                    </button>
+                </div>
                 <span>
-                    <h3>Lucas Angel</h3>
-                    <p>Desarrollador Full Stack Jr</p>
+                    <h3 class="text-center">{{Name.text}}</h3>
+                    <p class="text-center">{{Name.description}}</p>
                 </span>
             </div>
+        </div>        
+        <div class="col-1">
+            <button type="button" class="btn btn-sm btn-outline-dark btn-edit" (click)="toggleAdmin()" ><fa-icon
+                [icon]="faPen"></fa-icon>
+            </button>
         </div>
-        <div class="col-10">
+        <div class="col-8">
             <div class="generic-card">
+                <div class="d-flex">
+                    <h3 class="text-center flex-grow-1">{{AboutMe.text}}</h3>
+                    <button type="button" class="btn btn-sm btn-outline-dark btn-edit" [hidden]="!permission.admin" (click)="openModalAboutMe()" ><fa-icon
+                        [icon]="faPen"></fa-icon></button>
+                </div>
                 <span>
-                    <h3>Lorem ipsum</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-                        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                        cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <p class="text-center">{{AboutMe.description}}</p>
                 </span>
             </div>
         </div>

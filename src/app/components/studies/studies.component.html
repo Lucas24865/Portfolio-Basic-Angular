@@ -1,51 +1,21 @@
-<h2>Educacion</h2>
-            <ul>
-                <li>
-                    <span>
-                        <h4>Tecnicatura Universitaria en Programación</h4>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore
-                            et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                            nisi ut
-                            aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-                            esse
-                            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
-                            in
-                            culpa qui officia deserunt mollit anim id est laborum.
-                        </p>
-                    </span>
-                </li>
-                <li>
-                    <span>
-                        <h4>Argentina Programa</h4>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore
-                            et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                            nisi ut
-                            aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-                            esse
-                            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
-                            in
-                            culpa qui officia deserunt mollit anim id est laborum.
-                        </p>
-                    </span>
-                </li>
-                <li>
-                    <span>
-                        <h4>Ingenieria en computación</h4>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore
-                            et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                            nisi ut
-                            aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-                            esse
-                            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
-                            in
-                            culpa qui officia deserunt mollit anim id est laborum.
-                        </p>
-                    </span>
-                </li>
-            </ul>
+<div class="generic-card">
+    <h2>Educacion</h2>
+    <ul>
+        <li *ngFor="let education of studies;let indexOfelement=index;" class="mb-3">
+            <div class="row">
+                <div class="col-auto my-auto">
+                    <img [src]="education.url" class="genericLogo">
+                </div>
+                <div class="col my-auto">
+                    <div class="d-flex">
+                        <h3 class="flex-grow-1">{{education.text}}</h3>
+                        <button type="button" class="btn btn-sm btn-outline-dark btn-edit" [hidden]="!permission.admin" (click)="openModal(indexOfelement)" ><fa-icon
+                            [icon]="faPen"></fa-icon>
+                        </button>
+                    </div>
+                    <p>{{education.description}}</p>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

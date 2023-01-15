@@ -1,13 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
-.main-body{
+@import url("//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css");
+
+.main-body {
     background-color: #F0E9DB;
+    height: max-content;
 }
-.card-header{
+
+.card-header {
     background-color: #fbfaf8;
     border-radius: 20px;
 }
-.generic-card{
+
+.generic-card {
     background-color: #fbfaf8;
     padding: 2%;
     border-radius: 20px;
+}
+
+.genericLogo {
+    width: 55px;
+}
+
+.btn-edit {
+    border-radius: 10px;
+    max-height: 31px;
+}
+
+.hide {
+    display: none;
 }

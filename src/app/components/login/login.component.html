@@ -1,0 +1,39 @@
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Iniciar Sesión</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <form [formGroup]="form" (ngSubmit)="onSend($event)">
+    <div class="modal-body">
+        <div class="mb-3">
+          <label for="exampleInputUser" class="form-label">Nombre de Usuario</label>
+          <input type="text" formControlName="user" class="form-control" id="exampleInputUser" aria-describedby="emailHelp"
+          [ngClass]="{'is-invalid':User?.errors && User?.touched,
+          'is-valid':!User?.errors && User?.touched }">
+          <div *ngIf="User?.errors && User?.touched">
+            <p *ngIf="User?.hasError('required')" class="text-danger">
+                El Nombre de Usuario es requerido
+            </p>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+          <input type="password" formControlName="pass" class="form-control" id="exampleInputPassword1"
+          [ngClass]="{'is-invalid':Password?.errors && Password?.touched,
+          'is-valid':!Password?.errors && Password?.touched }">
+          <div *ngIf="Password?.errors && Password?.touched">
+            <p *ngIf="Password?.hasError('required')" class="text-danger">
+                La Contraseña es requerida
+            </p>
+          </div>
+        </div>
+        
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-outline-dark"  (click)="modal.close('Save click')">Submit</button>
+    </div>
+  </form>
+  </ng-template>
+
+  <button class="btn btn-success p-2 r-20"  (click)="open(content)">Iniciar Sesión</button>
+  
