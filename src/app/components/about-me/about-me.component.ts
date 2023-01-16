@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PortfolioService, PortfolioTextObj } from 'src/app/services/portfolio.service';
-import {faPen} from '@fortawesome/free-solid-svg-icons';
+import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EditModalComponent } from '../edit-modal/edit-modal.component';
 
@@ -11,29 +11,34 @@ import { EditModalComponent } from '../edit-modal/edit-modal.component';
 })
 export class AboutMeComponent implements OnInit {
   Name: PortfolioTextObj;
-  faPen=faPen;
+  faPen = faPen;
   AboutMe: PortfolioTextObj;
-  permission:any = PortfolioService.permission;
-  
+  permission: any = PortfolioService.permission;
+
   constructor(private data: PortfolioService,) {
     this.Name = new PortfolioTextObj
     this.AboutMe = new PortfolioTextObj
   }
   ngOnInit(): void {
-    this.data.getDataId("2").subscribe(data => {
-      this.Name = data[0];
+
+    PortfolioService.portFolioData.subscribe(data => {
+      this.Name = data.filter((dat:PortfolioTextObj) =>{
+      return dat.type === 2 ;
+    })[0];
+    
+    this.AboutMe = data.filter((dat:PortfolioTextObj) =>{
+      return dat.type === 6 ;
+    })[0];
     });
-    this.data.getDataId("6").subscribe(data => {
-      this.AboutMe = data[0];
-    });
+
   }
-  toggleAdmin(){
+  toggleAdmin() {
     PortfolioService.permission.admin = !PortfolioService.permission.admin
   }
-  openModalAboutMe(){
+  openModalAboutMe() {
     this.data.openEditModal(this.AboutMe);
   }
-  openModalName(){
+  openModalName() {
     this.data.openEditModal(this.Name);
   }
 }

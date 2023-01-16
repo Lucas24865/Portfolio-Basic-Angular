@@ -1,5 +1,9 @@
 <div class="generic-card">
-    <h2>Educacion</h2>
+    <div class="d-flex align-items-center pb-2">
+        <h2 class="me-3">Educación</h2>
+        <button type="button" class="btn btn-sm btn-outline-dark btn-edit" [hidden]="!permission.admin" (click)="Add()" ><fa-icon
+            [icon]="faPlus"></fa-icon></button>
+    </div>
     <ul>
         <li *ngFor="let education of studies;let indexOfelement=index;" class="mb-3">
             <div class="row">
@@ -11,6 +15,9 @@
                         <h3 class="flex-grow-1">{{education.text}}</h3>
                         <button type="button" class="btn btn-sm btn-outline-dark btn-edit" [hidden]="!permission.admin" (click)="openModal(indexOfelement)" ><fa-icon
                             [icon]="faPen"></fa-icon>
+                        </button>
+                        <button type="button" class="btn btn-sm btn-outline-dark btn-edit ms-2" style="min-width: 31px;"
+                        [hidden]="!permission.admin"   (click)="Delete(education.id)"><fa-icon [icon]="faXmark"></fa-icon>
                         </button>
                     </div>
                     <p>{{education.description}}</p>

@@ -1,8 +1,8 @@
 <div class="generic-card">
-    <div class="d-flex">
-        <h2 class="text-center flex-grow-1">Experiencia</h2>
+    <div class="d-flex align-items-center pb-2">
+        <h2 class="me-3">Experiencia</h2>
         <button type="button" class="btn btn-sm btn-outline-dark btn-edit" [hidden]="!permission.admin" (click)="Add()" ><fa-icon
-            [icon]="faPen"></fa-icon></button>
+            [icon]="faPlus"></fa-icon></button>
     </div>
     <ul>
         <li *ngFor="let exp of experience;let indexOfelement=index;" class="mb-3">
@@ -15,6 +15,9 @@
                         <h3 class="flex-grow-1">{{exp.text}}</h3>
                         <button type="button" class="btn btn-sm btn-outline-dark btn-edit" [hidden]="!permission.admin" (click)="openModal(indexOfelement)" ><fa-icon
                             [icon]="faPen"></fa-icon>
+                        </button>
+                        <button type="button" class="btn btn-sm btn-outline-dark btn-edit ms-2" style="min-width: 31px;"
+                        [hidden]="!permission.admin"   (click)="Delete(exp.id)"><fa-icon [icon]="faXmark"></fa-icon>
                         </button>
                     </div>
                     <p>{{exp.description}}</p>

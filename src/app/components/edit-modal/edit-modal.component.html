@@ -5,9 +5,9 @@
 	</div>
 	<form [formGroup]="form" (ngSubmit)="onSend($event)">
 		<div class="modal-body">
-			<div class="mb-3">
+			<div class="mb-3" >
 				<label for="idModal" class="form-label">Id Texto</label>
-				<input type="text" formControlName="id" class="form-control" id="idModal">
+				<input type="text" formControlName="id" class="form-control" id="idModal" readonly>
 			</div>
 			<div class="mb-3">
 				<label for="titleModal" class="form-label">Título</label>
@@ -21,13 +21,13 @@
 				<label for="urlModal" class="form-label">Url</label>
 				<input type="text" formControlName="url" class="form-control" id="urlModal">
 			</div>
-			<div class="mb-3">
+			<div class="mb-3" >
 				<label for="idTypeModal" class="form-label">Id Tipo de Texto</label>
-				<input type="text" formControlName="type" class="form-control" id="idTypeModal">
+				<input type="text" formControlName="type" class="form-control" id="idTypeModal" readonly>
 			</div>
 		</div>
 		<div class="modal-footer">
-			<button type="submit" class="btn btn-outline-dark" (click)="close()">Submit</button>
+			<button type="submit" class="btn btn-outline-dark">Submit</button>
 		</div>
 	</form>
 

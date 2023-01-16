@@ -23,21 +23,25 @@ export class SkillsComponent {
   }
 
   ngOnInit(): void {
-    this.data.getDataId("11").subscribe(data => {
-      this.Languages = data;
+
+    PortfolioService.portFolioData.subscribe(data => {
+      this.Languages = data.filter((dat:PortfolioTextObj) =>{
+        return dat.type === 11 ;
+      });
+      this.WebSkills = data.filter((dat:PortfolioTextObj) =>{
+        return dat.type === 12 ;
+      });
+      this.Programming = data.filter((dat:PortfolioTextObj) =>{
+        return dat.type === 13 ;
+      });
+      this.Frameworks = data.filter((dat:PortfolioTextObj) =>{
+        return dat.type === 14 ;
+      });
+      this.Databases = data.filter((dat:PortfolioTextObj) =>{
+        return dat.type === 15 ;
+      });
     });
-    this.data.getDataId("12").subscribe(data => {
-      this.WebSkills = data;
-    });
-    this.data.getDataId("13").subscribe(data => {
-      this.Programming = data;
-    });
-    this.data.getDataId("14").subscribe(data => {
-      this.Frameworks = data;
-    });
-    this.data.getDataId("15").subscribe(data => {
-      this.Databases = data;
-    });
+    
   }
   openModalLanguages(index:number){
     this.data.openEditModal(this.Languages[index]);
@@ -55,39 +59,61 @@ export class SkillsComponent {
     this.data.openEditModal(this.Databases[index]);
   }
 
-  DeleteLanguages(index:number){
-    this.data.openEditModal(this.Languages[index]);
+  Delete(index:number){
+    this.data.Loading();
+    this.data.Delete(index).subscribe({
+      next: (data) => { console.log(JSON.stringify(data));this.data.Deleted();this.ngOnInit()},
+      error: (err) => this.data.DeleteError()
+    });
+    
   }
-  DeleteWebSkills(index:number){
-    this.data.openEditModal(this.WebSkills[index]);
-  }
-  DeleteProgramming(index:number){
-    this.data.openEditModal(this.Programming[index]);
-  }
-  DeleteFrameworks(index:number){
-    this.data.openEditModal(this.Frameworks[index]);
-  }
-  DeleteDatabases(index:number){
-    this.data.openEditModal(this.Databases[index]);
-  }
+
 
   AddLanguages(){
-    this.data.openAddModal(11);
+    this.data.openAddModal(
+      {  id: -1,
+      text: "",
+      description: "",
+      url: "",
+      type: 11}
+      );
   }
   AddWebSkills(){
-    this.data.openAddModal(12);
+    this.data.openAddModal(
+      {  id: -1,
+      text: "",
+      description: "",
+      url: "",
+      type: 12}
+      );
   }
   AddProgramming(){
-    this.data.openAddModal(13);
+    this.data.openAddModal(
+      {  id: -1,
+      text: "",
+      description: "",
+      url: "",
+      type: 13}
+      );
   }
   AddFrameworks(){
-    this.data.openAddModal(14);
+    this.data.openAddModal(
+      {  id: -1,
+      text: "",
+      description: "",
+      url: "",
+      type: 14}
+      );
   }
   AddDatabases(){
-    this.data.openAddModal(15);
+    this.data.openAddModal(
+      {  id: -1,
+      text: "",
+      description: "",
+      url: "",
+      type: 15}
+      );
   }
-
-
 
 
 }

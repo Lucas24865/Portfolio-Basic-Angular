@@ -17,8 +17,6 @@ import { PortfolioService } from './services/portfolio.service';
 import { InterceptorService } from './services/interceptor.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EditModalComponent } from './components/edit-modal/edit-modal.component';
-import { AddModalComponent } from './components/add-modal/add-modal.component';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,8 +27,7 @@ import { AddModalComponent } from './components/add-modal/add-modal.component';
     ExperienceComponent,
     LoginComponent,
     PortfolioComponent,
-    EditModalComponent,
-    AddModalComponent
+    EditModalComponent
   ],
   imports: [
     BrowserModule,

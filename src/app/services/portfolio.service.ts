@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
+import Swal from 'sweetalert2';
 import { EditModalComponent } from '../components/edit-modal/edit-modal.component';
 
 @Injectable({
@@ -11,10 +12,14 @@ export class PortfolioService {
   url: string = "https://portfolio-lucas24865.koyeb.app/api/getData/PortfolioText/GetAll";
   urlid: string = "https://portfolio-lucas24865.koyeb.app/api/getData/PortfolioText/GetByTypeId?id=";
   addUrl: string = "https://portfolio-lucas24865.koyeb.app/api/PortfolioText/Add";
-  deleteUrl: string = "https://portfolio-lucas24865.koyeb.app/api/PortfolioText/Add?id=";
+  deleteUrl: string = "https://portfolio-lucas24865.koyeb.app/api/PortfolioText/Delete?id=";
+
   public static objData: any;
+  public static portFolioData: Observable<any>;
   public static permission: any = { admin: false };
   constructor(private http: HttpClient, private modalService: NgbModal) {
+    PortfolioService.portFolioData = this.http.get(this.url);
+
   }
 
   openEditModal(obj: any) {
@@ -22,21 +27,24 @@ export class PortfolioService {
     this.modalService.open(EditModalComponent, { ariaLabelledBy: 'modal-basic-title' });
   }
 
-  Add(obj:PortfolioTextObj):Observable<any>{    
-    return this.http.post(this.addUrl,obj);
+  Add(obj: PortfolioTextObj): Observable<any> {
+    return this.http.post(this.addUrl, obj);
   }
-  
-  Delete(id:number):Observable<any>{
+
+  Delete(id: number): Observable<any> {
     return this.http.delete(this.deleteUrl + id.toString());
   }
-  openAddModal(type: number) {
-    PortfolioService.objData = new PortfolioTextObj(type);
+  openAddModal(obj: PortfolioTextObj) {
+    PortfolioService.objData = obj;
     this.modalService.open(EditModalComponent, { ariaLabelledBy: 'modal-basic-title' });
   }
 
   DeleteElement(id: string) {
     PortfolioService.objData = new PortfolioTextObj;
     this.modalService.open(EditModalComponent, { ariaLabelledBy: 'modal-basic-title' });
+  }
+  refreshData() {
+    PortfolioService.portFolioData = this.http.get(this.url);
   }
   getData(): Observable<any> {
     return this.http.get(this.url);
@@ -56,6 +64,28 @@ export class PortfolioService {
       return el.type === id;
     });
   }
+  DeleteError() {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'El objeto no pudo ser eliminado!'
+    })
+  }
+  Deleted() {
+    Swal.fire({
+      icon: 'success',
+      title: 'El objeto fue eliminado exitosamente',
+    })
+  }
+  Loading() {
+    Swal.fire({
+      title: 'Cargando!',
+      icon: 'info',
+      text: 'Por favor espere.',
+      showConfirmButton: false,
+      allowOutsideClick: false
+    });
+  }
 }
 
 export class PortfolioTextObj {
@@ -64,20 +94,11 @@ export class PortfolioTextObj {
   description: string
   url: string
   type: number
-  constructor(type?: number) {
-    if (type) {
-      this.id = 0
-      this.text = ""
-      this.description = ""
-      this.url = ""
-      this.type = 0
-    }
-    else {
-      this.id = 0
-      this.text = ""
-      this.description = ""
-      this.url = ""
-      this.type = type!
-    }
+  constructor() {
+    this.id = 0
+    this.text = ""
+    this.description = ""
+    this.url = ""
+    this.type = 0
   }
 }

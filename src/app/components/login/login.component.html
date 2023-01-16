@@ -35,5 +35,5 @@
   </form>
   </ng-template>
 
-  <button class="btn btn-success p-2 r-20"  (click)="open(content)">Iniciar Sesión</button>
-  
+  <button class="btn btn-success p-2 r-20"  (click)="open(content)" [hidden]="permission.admin">Iniciar Sesión</button>
+  <button class="btn btn-success p-2 r-20"  (click)="logout()" [hidden]="!permission.admin">Cerrar Sesión</button>

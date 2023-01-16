@@ -19,7 +19,6 @@ export class InterceptorService {
         }
       })
     }
-    console.log(currentUser);
     return next.handle(req);
   }
   

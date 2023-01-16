@@ -13,7 +13,8 @@ import { PortfolioService } from 'src/app/services/portfolio.service';
 })
 export class LoginComponent {
   form: FormGroup;
-  constructor(private modalService: NgbModal, private formBuilder: FormBuilder, private authenticationService: AuthenticationService, private data: PortfolioService) {
+  permission:any = PortfolioService.permission;
+  constructor(private modalService: NgbModal, private formBuilder: FormBuilder, private authenticationService: AuthenticationService, private data: PortfolioService) {    
     this.form = this.formBuilder.group(
       {
         user: ['', [Validators.required]],
@@ -38,12 +39,16 @@ export class LoginComponent {
       allowOutsideClick: false
     });
     this.authenticationService.Login(this.form.value).subscribe({
-      next: (data) => { console.log(JSON.stringify(data));Success();this.data.setAdmin(true); },
+      next: (data) => { console.log(JSON.stringify(data));Success();},
       error: (err) => CredentialError()
     });
   }
   open(content: any) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
+  }
+  logout(){
+    LogOut();
+    this.authenticationService.Logout();
   }
 }
 
@@ -52,6 +57,12 @@ function CredentialError(){
     icon: 'error',
     title: 'Oops...',
     text: 'Credenciales invalidas!'
+  })
+}
+function LogOut(){
+  Swal.fire({
+    icon: 'success',
+    title: 'La sesión fue cerrada exitosamente.',
   })
 }
 function Success(){
