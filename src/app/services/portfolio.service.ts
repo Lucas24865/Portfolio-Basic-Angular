@@ -18,8 +18,9 @@ export class PortfolioService {
   public static portFolioData: Observable<any>;
   public static permission: any = { admin: false };
   constructor(private http: HttpClient, private modalService: NgbModal) {
+    this.Loading();
     PortfolioService.portFolioData = this.http.get(this.url);
-
+    this.Close();
   }
 
   openEditModal(obj: any) {
@@ -85,6 +86,9 @@ export class PortfolioService {
       showConfirmButton: false,
       allowOutsideClick: false
     });
+  }
+  Close() {
+    Swal.close();
   }
 }
 
